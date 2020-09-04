@@ -1,0 +1,71 @@
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Product Search Box"
+        [(ngModel)]="product_name"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="searchProduct()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-6">
+    <h4>Product List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let product of products; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveProduct(product, i)"
+      >
+        {{ product.product_name }}
+      </li>
+    </ul>
+	
+  </div>
+  
+  <div class="col-md-6">
+    <div *ngIf="currentProduct">
+      <h4>Product</h4>
+      
+	  <div>
+        <label><strong>Product ID:</strong></label> {{ currentProduct.product_id }}
+      </div>
+      
+	  <div>
+        <label><strong>Product Name:</strong></label> {{ currentProduct.product_name }}
+      </div>
+	  
+	  <div>
+        <label><strong>Cost Per Unit:</strong></label> {{ currentProduct.cost_per_unit }}
+      </div>
+      
+	  <div>
+        <label><strong>Selling Price:</strong></label> {{ currentProduct.selling_price }}
+      </div>
+      
+	  <div>
+        <label><strong>No of Unit Available:</strong></label> {{ currentProduct.no_of_unit_available }}
+      </div>
+	  
+	  <a class="badge badge-warning" routerLink="/products/{{ currentProduct.id }}">
+        Edit
+      </a>
+    </div>
+
+    <div *ngIf="!currentProduct">
+      <br />
+      <p>Please click on a Product...</p>
+    </div>
+  </div>
+</div>
